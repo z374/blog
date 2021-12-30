@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-k^xuivsl#w_mm+f!fl@3k&0t$aee*iff+70^dqq_r)kko(vf=-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "blog.apps.BlogConfig",
     "accounts.apps.AccountsConfig",
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -119,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [str(BASE_DIR.joinpath("static"))]
+STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
